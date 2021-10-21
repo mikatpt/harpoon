@@ -169,13 +169,6 @@ M.find_files = function(opts)
     opts = opts or {}
     opts.prompt_title = "Harpoon Finder"
     opts.search_dirs = M.search_dirs()
-
-    for idx = 1, Marked.get_length() do
-        local file = Marked.get_marked_file_name(idx)
-        if file ~= "" then
-            table.insert(opts.search_dirs, file)
-        end
-    end
     telescope.find_files(opts)
 end
 

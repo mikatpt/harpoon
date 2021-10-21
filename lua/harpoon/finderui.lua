@@ -154,10 +154,21 @@ M.select_menu_item = function()
     M.find_files()
 end
 
+M.search_dirs = function()
+    local dirs = {}
+    for idx = 1, Marked.get_length() do
+        local file = Marked.get_marked_file_name(idx)
+        if file ~= "" then
+            table.insert(dirs, file)
+        end
+    end
+    return dirs
+end
+
 M.find_files = function(opts)
     opts = opts or {}
     opts.prompt_title = "Harpoon Finder"
-    opts.search_dirs = {}
+    opts.search_dirs = M.search_dirs()
 
     for idx = 1, Marked.get_length() do
         local file = Marked.get_marked_file_name(idx)

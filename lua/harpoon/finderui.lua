@@ -154,12 +154,10 @@ M.select_menu_item = function()
     M.find_files()
 end
 
-M.find_files = function()
-    local opts = {
-        prompt_title = "Harpoon Finder",
-        search_dirs = {},
-        file_ignore_patterns = {},
-    }
+M.find_files = function(opts)
+    opts = opts or {}
+    opts.prompt_title = "Harpoon Finder"
+    opts.search_dirs = {}
 
     for idx = 1, Marked.get_length() do
         local file = Marked.get_marked_file_name(idx)

@@ -68,7 +68,7 @@ local function get_dir_from_name(filename)
         end
     end
 
-    return filename
+    return ""
 end
 
 local function get_buf_name(id)

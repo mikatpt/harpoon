@@ -70,6 +70,9 @@ local function ensure_correct_config(config)
             term = {
                 cmds = {},
             },
+            finder = {
+                marks = {},
+            },
         }
     end
 
@@ -87,6 +90,14 @@ local function ensure_correct_config(config)
         proj.term = { cmds = {} }
     end
 
+    if proj.finder == nil then
+        log.debug(
+            "ensure_correct_config(): No marks found for finder",
+            vim.loop.cwd()
+        )
+        proj.finder = { marks = {} }
+    end
+
     local marks = proj.mark.marks
 
     for idx, mark in pairs(marks) do
@@ -98,6 +109,18 @@ local function ensure_correct_config(config)
         end
 
         marks[idx].filename = utils.normalize_path(mark.filename)
+    end
+
+    local marks2 = proj.finder.marks
+
+    for idx, mark in pairs(marks2) do
+        if type(mark) == "string" then
+            mark = {
+                filename = mark,
+            }
+            marks[idx] = mark
+        end
+        marks2[idx].filename = mark.filename
     end
 
     return config
@@ -188,6 +211,11 @@ end
 M.get_mark_config = function()
     log.trace("get_mark_config()")
     return ensure_correct_config(HarpoonConfig).projects[vim.loop.cwd()].mark
+end
+
+M.get_finder_config = function()
+    log.trace("get_finder_config()")
+    return ensure_correct_config(HarpoonConfig).projects[vim.loop.cwd()].finder
 end
 
 M.get_menu_config = function()

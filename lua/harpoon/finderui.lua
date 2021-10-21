@@ -151,7 +151,7 @@ M.select_menu_item = function()
     -- local idx = vim.fn.line(".")
     -- close_menu(true)
     -- M.nav_file(idx)
-    M.telescope_search()
+    M.find_files()
 end
 
 M.find_files = function()

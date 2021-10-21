@@ -120,7 +120,7 @@ local function ensure_correct_config(config)
             }
             marks[idx] = mark
         end
-        marks2[idx].filename = mark.filename
+        marks2[idx].filename = utils.normalize_path(mark.filename)
     end
 
     return config
